@@ -54,6 +54,8 @@ impl fmt::Display for PrecompileErrors {
 pub enum PrecompileError {
     /// out of gas is the main error. Others are here just for completeness
     OutOfGas,
+    // Poseidon errors
+    PoseidonWrongLength,
     // Blake2 errors
     Blake2WrongLength,
     Blake2WrongFinalIndicatorFlag,
@@ -100,6 +102,7 @@ impl fmt::Display for PrecompileError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let s = match self {
             Self::OutOfGas => "out of gas",
+            Self::PoseidonWrongLength => "wrong input length for poseidon",
             Self::Blake2WrongLength => "wrong input length for blake2",
             Self::Blake2WrongFinalIndicatorFlag => "wrong final indicator flag for blake2",
             Self::ModexpExpOverflow => "modexp exp overflow",

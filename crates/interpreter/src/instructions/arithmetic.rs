@@ -25,6 +25,16 @@ pub fn mul<WIRE: InterpreterTypes, H: Host + ?Sized>(
     *op2 = op1.wrapping_mul(*op2);
 }
 
+pub fn muladd<WIRE: InterpreterTypes, H: Host + ?Sized>(
+    interpreter: &mut Interpreter<WIRE>,
+    _host: &mut H,
+) {
+    gas!(interpreter, gas::LOW);
+    popn_top!([op1, op2], op3, interpreter);
+    let res = op1.wrapping_mul(op2);
+    *op3 = res.wrapping_add(*op3);
+}
+
 pub fn sub<WIRE: InterpreterTypes, H: Host + ?Sized>(
     interpreter: &mut Interpreter<WIRE>,
     _host: &mut H,

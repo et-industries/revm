@@ -410,6 +410,7 @@ opcodes! {
     0x09 => MULMOD   => stack_io(3, 1);
     0x0A => EXP      => stack_io(2, 1);
     0x0B => SIGNEXTEND => stack_io(2, 1);
+    0x0C => MULADD      => stack_io(3, 1);
     // 0x0C
     // 0x0D
     // 0x0E

@@ -32,8 +32,6 @@ pub const fn instruction_table<WIRE: InterpreterTypes, H: Host + ?Sized>(
     let mut table = [control::unknown as crate::table::Instruction<WIRE, H>; 256];
 
     table[STOP as usize] = control::stop;
-    table[ADD as usize] = arithmetic::add;
-    table[STOP as usize] = control::stop;
 
     table[ADD as usize] = arithmetic::add;
     table[MUL as usize] = arithmetic::mul;
@@ -46,6 +44,7 @@ pub const fn instruction_table<WIRE: InterpreterTypes, H: Host + ?Sized>(
     table[MULMOD as usize] = arithmetic::mulmod;
     table[EXP as usize] = arithmetic::exp;
     table[SIGNEXTEND as usize] = arithmetic::signextend;
+    table[MULADD as usize] = arithmetic::muladd;
 
     table[LT as usize] = bitwise::lt;
     table[GT as usize] = bitwise::gt;
