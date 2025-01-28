@@ -9,6 +9,7 @@ extern crate alloc as std;
 pub use bytecode;
 pub use context;
 pub use context_interface;
+pub use database;
 pub use database_interface;
 pub use handler;
 pub use handler_interface;
