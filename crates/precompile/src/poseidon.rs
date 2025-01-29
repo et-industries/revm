@@ -12,7 +12,7 @@ const F_WIDTH: usize = 5;
 const PRICE_PER_WIDTH: usize = 10;
 
 // Address 0x10F2C to be safe
-pub const FUN: PrecompileWithAddress = PrecompileWithAddress(crate::u64_to_address(0x10F2C), run);
+pub const HASH: PrecompileWithAddress = PrecompileWithAddress(crate::u64_to_address(0x10F2C), run);
 
 pub fn run(input: &Bytes, gas_limit: u64) -> PrecompileResult {
     let input = &mut input.clone();

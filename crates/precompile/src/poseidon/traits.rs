@@ -84,7 +84,7 @@ pub fn hex_to_field(s: &str) -> Fr {
     let s = &s[2..];
     let mut bytes = hex::decode(s).expect("Invalid params");
     bytes.reverse();
-    let mut bytes_wide: [u8; 64] = [0; 64];
+    let mut bytes_wide: [u8; 32] = [0; 32];
     bytes_wide[..bytes.len()].copy_from_slice(&bytes[..]);
     Fr::from_slice(&bytes_wide).unwrap()
 }

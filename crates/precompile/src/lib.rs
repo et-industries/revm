@@ -74,6 +74,7 @@ impl Precompiles {
                 hash::SHA256,
                 hash::RIPEMD160,
                 identity::FUN,
+                poseidon::HASH,
             ]);
             Box::new(precompiles)
         })
