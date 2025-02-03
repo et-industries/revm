@@ -411,7 +411,6 @@ opcodes! {
     0x0A => EXP      => stack_io(2, 1);
     0x0B => SIGNEXTEND => stack_io(2, 1);
     0x0C => MULADD      => stack_io(3, 1);
-    // 0x0C
     // 0x0D
     // 0x0E
     // 0x0F
@@ -429,7 +428,7 @@ opcodes! {
     0x1B => SHL  => stack_io(2, 1);
     0x1C => SHR  => stack_io(2, 1);
     0x1D => SAR  => stack_io(2, 1);
-    // 0x1E
+    0x1E => NUM2BITS  => stack_io(1, 1);
     // 0x1F
     0x20 => KECCAK256 => stack_io(2, 1);
     // 0x21

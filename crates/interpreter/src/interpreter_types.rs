@@ -2,7 +2,10 @@ use bytecode::eof::TypesSection;
 use specification::hardfork::SpecId;
 
 use crate::{Gas, InstructionResult, InterpreterAction};
-use core::ops::{Deref, Range};
+use core::{
+    fmt::Debug,
+    ops::{Deref, Range},
+};
 use primitives::{Address, Bytes, B256, U256};
 
 /// Helper function to read immediates data from the bytecode
@@ -206,7 +209,7 @@ pub trait Interp {
 }
 
 pub trait InterpreterTypes {
-    type Stack: StackTrait;
+    type Stack: StackTrait + Debug;
     type Memory: MemoryTrait;
     type Bytecode: Jumps + Immediates + LegacyBytecode + EofData + EofContainer + EofCodeInfo;
     type ReturnData: ReturnData;

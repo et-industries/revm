@@ -29,6 +29,7 @@ pub fn muladd<WIRE: InterpreterTypes, H: Host + ?Sized>(
     interpreter: &mut Interpreter<WIRE>,
     _host: &mut H,
 ) {
+    println!("{:?}", interpreter.stack);
     gas!(interpreter, gas::LOW);
     popn_top!([op1, op2], op3, interpreter);
     let res = op1.wrapping_mul(op2);

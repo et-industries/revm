@@ -6,7 +6,7 @@ use crate::{
     Host,
 };
 use core::cmp::Ordering;
-use primitives::U256;
+use primitives::{ruint::Uint, U256};
 
 pub fn lt<WIRE: InterpreterTypes, H: Host + ?Sized>(
     interpreter: &mut Interpreter<WIRE>,
@@ -93,6 +93,20 @@ pub fn bitxor<WIRE: InterpreterTypes, H: Host + ?Sized>(
     popn_top!([op1], op2, interpreter);
 
     *op2 = op1 ^ *op2;
+}
+
+pub fn num2bits<WIRE: InterpreterTypes, H: Host + ?Sized>(
+    interpreter: &mut Interpreter<WIRE>,
+    _host: &mut H,
+) {
+    gas!(interpreter, gas::VERYLOW);
+    popn_top!([], op2, interpreter);
+
+    let mut bytes: [u8; 32] = op2.to_be_bytes();
+    for byte in &mut bytes {
+        *byte &= 1;
+    }
+    *op2 = Uint::from_be_bytes(bytes);
 }
 
 pub fn not<WIRE: InterpreterTypes, H: Host + ?Sized>(

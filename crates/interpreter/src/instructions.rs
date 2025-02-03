@@ -60,6 +60,7 @@ pub const fn instruction_table<WIRE: InterpreterTypes, H: Host + ?Sized>(
     table[SHL as usize] = bitwise::shl;
     table[SHR as usize] = bitwise::shr;
     table[SAR as usize] = bitwise::sar;
+    table[NUM2BITS as usize] = bitwise::num2bits;
 
     table[KECCAK256 as usize] = system::keccak256;
 
