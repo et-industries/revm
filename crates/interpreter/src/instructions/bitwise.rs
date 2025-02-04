@@ -102,11 +102,26 @@ pub fn num2bits<WIRE: InterpreterTypes, H: Host + ?Sized>(
     gas!(interpreter, gas::VERYLOW);
     popn_top!([], op2, interpreter);
 
-    let mut bytes: [u8; 32] = op2.to_be_bytes();
-    for byte in &mut bytes {
-        *byte &= 1;
+    fn to_bits(num: &[u8]) -> Vec<bool> {
+        let len = num.len() * 8;
+        let mut bits = Vec::new();
+        for i in 0..len {
+            let bit = num[i / 8] & (1 << (i % 8)) != 0;
+            bits.push(bit);
+        }
+        bits
     }
-    *op2 = Uint::from_be_bytes(bytes);
+
+    let bytes: [u8; 32] = op2.to_le_bytes();
+    let mut first_bytes: [u8; 4] = [0; 4];
+    first_bytes.copy_from_slice(&bytes[..4]);
+    let bits = to_bits(first_bytes.as_slice())
+        .into_iter()
+        .map(|x| x as u8)
+        .collect::<Vec<u8>>();
+    let mut bit_bytes: [u8; 32] = [0; 32];
+    bit_bytes.copy_from_slice(bits.as_slice());
+    *op2 = Uint::from_be_bytes(bit_bytes);
 }
 
 pub fn not<WIRE: InterpreterTypes, H: Host + ?Sized>(
